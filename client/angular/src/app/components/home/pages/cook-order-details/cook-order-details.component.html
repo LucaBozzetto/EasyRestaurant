@@ -1,0 +1,180 @@
+      <div class="kt-portlet ">
+        <div class="kt-portlet__body">
+            <h2 class="center-text">Order #{{ order?.orderNumber }}</h2>
+            <h3 class="center-text">Table {{ order?.tableNumber }}</h3>
+            <div class="center-text">
+            <span *ngFor="let tag of getTags()" [ngClass]="{'kt-badge--primary': tag==='starter', 'kt-badge--warning': tag==='pizza', 'kt-badge--success': tag==='main course', 'kt-badge--danger': tag==='dessert'}"
+                            class="kt-badge kt-badge--inline kt-badge--lg kt-badge--pill margin-tags">{{ tag | titlecase }}</span>
+            </div>
+            <!-- tags -->
+
+            <!--begin::Accordion-->
+            <div class="accordion accordion-solid accordion-toggle-plus">
+
+              <!--  Waiting -->
+              <div class="card">
+                <div class="card-header" (click)="toggleTab('waiting')">
+                  <div class="card-title" [ngClass]="{collapsed: !isTabOpened('waiting')}">
+                    <i class="flaticon2-time"></i> Waiting
+                  </div>
+                </div>
+                <div class="collapse" [ngClass]="{show: isTabOpened('waiting')}">
+                  <div class="card-body">
+
+                    <!-- elements -->
+                    <div class="kt-section kt-section--space-md" *ngFor="let element of getElementsByStatus('waiting')" (click)="updateElementStatus(element)">
+                      <div class="kt-widget24 kt-widget24--solid  hvr-wobble-horizontal">
+                        <div class="kt-widget24__details">
+                          <div class="kt-widget24__info">
+                            <a class="kt-widget24__title font-important" >
+                              {{ element.item.name | titlecase }}
+                            </a>
+                            <span class="kt-widget24__desc font-medium">
+                              Quantity: {{ element.quantity }}
+                            </span>
+                          </div>
+                          <span class="kt-widget24__stats kt-font-brand">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon icon-time">
+                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                  <rect id="bound" x="0" y="0" width="24" height="24"/>
+                                  <path d="M12,22 C7.02943725,22 3,17.9705627 3,13 C3,8.02943725 7.02943725,4 12,4 C16.9705627,4 21,8.02943725 21,13 C21,17.9705627 16.9705627,22 12,22 Z" id="Mask" fill="#000000" opacity="0.3"/>
+                                  <path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" id="Path-107" fill="#000000"/>
+                              </g>
+                          </svg>
+
+                            {{ element.item.timeRequired }} {{ element.item.timeRequired < 2 ? 'min' : 'mins' }}
+                          </span>
+                        </div>
+                        <div class="kt-widget24__action">
+                            <span class="kt-widget24__desc font-small" *ngIf="element?.note?.length > 0">
+                                Note: {{ element.note }}
+                              </span>
+
+                              <span class="kt-widget24__desc font-small" *ngIf="element?.extra?.length > 0">
+                                  Extras: 
+                                      <span *ngFor="let extra of element?.extra" class="kt-badge kt-badge--primary kt-badge--lg kt-badge--outline kt-badge--inline kt-badge--pill margin-tags">{{ extra.name }}</span>
+                                </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h6 *ngIf="getElementsByStatus('waiting')?.length < 1" class="center-text">No elements yet</h6>
+
+                  </div>
+                </div>
+              </div>
+
+               <!--  Preparation -->
+               <div class="card">
+                <div class="card-header" (click)="toggleTab('preparation')">
+                  <div class="card-title" [ngClass]="{collapsed: !isTabOpened('preparation')}">
+                    <i class="flaticon2-time"></i> Cooking
+                  </div>
+                </div>
+                <div class="collapse" [ngClass]="{show: isTabOpened('preparation')}">
+                  <div class="card-body">
+
+                    <!-- elements -->
+                    <div class="kt-section kt-section--space-md " *ngFor="let element of getElementsByStatus('preparation')" (click)="updateElementStatus(element)">
+                      <div class="kt-widget24 kt-widget24--solid hvr-wobble-horizontal">
+                        <div class="kt-widget24__details">
+                          <div class="kt-widget24__info">
+                            <a class="kt-widget24__title font-important" >
+                              {{ element.item.name | titlecase }}
+                            </a>
+                            <span class="kt-widget24__desc font-medium">
+                              Quantity: {{ element.quantity }}
+                            </span>
+                          </div>
+                          <span class="kt-widget24__stats kt-font-brand">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon icon-time">
+                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                  <rect id="bound" x="0" y="0" width="24" height="24"/>
+                                  <path d="M12,22 C7.02943725,22 3,17.9705627 3,13 C3,8.02943725 7.02943725,4 12,4 C16.9705627,4 21,8.02943725 21,13 C21,17.9705627 16.9705627,22 12,22 Z" id="Mask" fill="#000000" opacity="0.3"/>
+                                  <path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" id="Path-107" fill="#000000"/>
+                              </g>
+                          </svg>
+
+                            {{ element.item.timeRequired }} {{ element.item.timeRequired < 2 ? 'min' : 'mins' }}
+                          </span>
+                        </div>
+                        <div class="kt-widget24__action">
+                            <span class="kt-widget24__desc font-small" *ngIf="element?.note?.length > 0">
+                                Note: {{ element.note }}
+                              </span>
+
+                              <span class="kt-widget24__desc font-small" *ngIf="element?.extra?.length > 0">
+                                  Extras: 
+                                      <span *ngFor="let extra of element?.extra" class="kt-badge kt-badge--primary kt-badge--lg kt-badge--outline kt-badge--inline kt-badge--pill margin-tags">{{ extra.name }}</span>
+                                </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h6 *ngIf="getElementsByStatus('preparation')?.length < 1" class="center-text">No elements yet</h6>
+
+                  </div>
+                </div>
+              </div>
+
+              <!--  Completed -->
+              <div class="card">
+                <div class="card-header" (click)="toggleTab('completed')">
+                  <div class="card-title" [ngClass]="{collapsed: !isTabOpened('completed')}">
+                    <i class="flaticon2-time"></i> Completed
+                  </div>
+                </div>
+                <div class="collapse" [ngClass]="{show: isTabOpened('completed')}">
+                  <div class="card-body">
+                    
+                    <!-- elements -->
+                    <div class="kt-section kt-section--space-md" *ngFor="let element of getElementsByStatus('completed')">
+                      <div class="kt-widget24 kt-widget24--solid">
+                        <div class="kt-widget24__details">
+                          <div class="kt-widget24__info">
+                            <a class="kt-widget24__title font-important" >
+                              {{ element.item.name | titlecase }}
+                            </a>
+                            <span class="kt-widget24__desc font-medium">
+                              Quantity: {{ element.quantity }}
+                            </span>
+                          </div>
+                          <span class="kt-widget24__stats kt-font-brand">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon icon-time">
+                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                  <rect id="bound" x="0" y="0" width="24" height="24"/>
+                                  <path d="M12,22 C7.02943725,22 3,17.9705627 3,13 C3,8.02943725 7.02943725,4 12,4 C16.9705627,4 21,8.02943725 21,13 C21,17.9705627 16.9705627,22 12,22 Z" id="Mask" fill="#000000" opacity="0.3"/>
+                                  <path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" id="Path-107" fill="#000000"/>
+                              </g>
+                          </svg>
+
+                            {{ element.item.timeRequired }} {{ element.item.timeRequired < 2 ? 'min' : 'mins' }}
+                          </span>
+                        </div>
+                        <div class="kt-widget24__action">
+                            <span class="kt-widget24__desc font-small" *ngIf="element?.note?.length > 0">
+                                Note: {{ element.note }}
+                              </span>
+
+                              <span class="kt-widget24__desc font-small" *ngIf="element?.extra?.length > 0">
+                                  Extras: 
+                                      <span *ngFor="let extra of element?.extra" class="kt-badge kt-badge--primary kt-badge--lg kt-badge--outline kt-badge--inline kt-badge--pill margin-tags">{{ extra.name }}</span>
+                                </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h6 *ngIf="getElementsByStatus('completed')?.length < 1" class="center-text">No elements yet</h6>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!--end::Accordion-->
+
+        </div>
+      </div>

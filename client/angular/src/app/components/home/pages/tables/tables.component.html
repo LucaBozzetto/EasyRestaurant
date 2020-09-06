@@ -1,0 +1,60 @@
+<!-- <div *ngFor="let chunk of this.getChunks(3); let i = index"> -->
+  <div class="row">
+    <!--begin:: Table-->
+    <div class="col-xl-4" *ngFor="let table of tables">
+      <div class="kt-portlet kt-portlet--fit kt-portlet--head-noborder kt-portlet--height-fluid-half" [ngClass]="getCardStyle(table)" (click)="table.free && !isAdmin? openDialog(table) : null" [routerLink]="getTableLink(table)">
+        <div class="kt-portlet__head kt-portlet__space-x">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title table-title">
+              Table {{table.tableNumber}}
+            </h3>
+          </div>
+          <div class="kt-portlet__head-toolbar">
+            <a  class="btn  btn-sm btn-bold" [ngClass]="getStatusStyle(table)">
+              {{table.free ? "Free" : this.hasOrderReady(table) ? "Order Ready" : "Occupied"}}
+            </a>
+          </div>
+        </div>
+        <div class="kt-portlet__body kt-portlet__body--fluid">
+          <div class="kt-widget20">
+            <div class="kt-widget20__content kt-portlet__space-x">
+              <span class="kt-widget20__number kt-font-brand table-message">{{ this.getMessageText(table) }}</span>
+              <span class="kt-widget20__desc" [ngClass]="getSeatsStyle(table)">{{table.free ? table.seats + " Seats available" : table.customers + " Customers seated" }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!--end:: Table-->
+  </div>
+<!-- </div> -->
+
+<!-- <div class="row"> -->
+
+
+   <!--begin:: Table-->
+   <!-- <div class="col-xl-4">
+      <div class="kt-portlet kt-portlet--fit kt-portlet--head-noborder kt-portlet--height-fluid-half table-order">
+        <div class="kt-portlet__head kt-portlet__space-x">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title table-title">
+              Table 3
+            </h3>
+          </div>
+          <div class="kt-portlet__head-toolbar">
+            <a  class="btn  btn-sm btn-bold table-status-order">
+                Order Ready
+            </a>
+          </div>
+        </div>
+        <div class="kt-portlet__body kt-portlet__body--fluid">
+          <div class="kt-widget20">
+            <div class="kt-widget20__content kt-portlet__space-x">
+              <span class="kt-widget20__number kt-font-brand table-message">Food/beverage/order ready</span>
+              <span class="kt-widget20__desc table-seats-order">6 Customers Seated</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!--end:: Table-->

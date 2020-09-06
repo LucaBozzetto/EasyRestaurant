@@ -1,0 +1,30 @@
+{
+  "name": "it.unive.easyrestaurant",
+  "version": "1.0.0",
+  "description": "A restaurant management system developed for Web tech course @ Ca'Foscari university of Venice",
+  "main": "app.js",
+  "scripts": {
+    "install": "npm run install-server && npm run install-web && npm run install-mobile && npm run install-desktop",
+    "install-server": "cd server && npm install && cd -",
+    "install-web": "cd client/angular && npm install && cd -",
+    "install-mobile": "cd client/mobile && npm install && cd -",
+    "install-desktop": "cd client/desktop && npm install && cd -",
+    "start-server": "cd server && npm start && cd -",
+    "start-server-local": "cd server && npm run start-local && cd -",
+    "start-db": "cd server && npm run start-db",
+    "populate-db": "cd server && npm run populate-db",
+    "start-web": "cd client/angular && ng serve --prod --open",
+    "start-web-local": "cd client/angular && ng serve --open",
+    "start-desktop": "cd client/desktop && npm run start",
+    "build-mobile": "cd client/mobile && npm run build && cd -",
+    "build-desktop": "cd client/desktop && npm run build && cd -",
+    "generate-android": "mkdir -p ./releases/ && mkdir -p ./releases/android && cd client/mobile && npm run generate-android && cd -",
+    "generate-desktop": "mkdir -p ./releases/ && mkdir -p ./releases/desktop && cd client/desktop && npm run generate && cd -"
+  },
+  "author": "Luca Bozzetto",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LucaBozzetto/EasyRestaurant"
+  }
+}

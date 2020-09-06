@@ -1,0 +1,12 @@
+<h1 align="center" mat-dialog-title>{{name | titlecase }}</h1>
+<div mat-dialog-content>
+  <p align="center">How many you wish to add?</p>
+<br>
+      <mat-slider cdkFocusInitial #customSlider  min="1" max="10" step="1" value="2" color="primary" thumbLabel></mat-slider>
+<br>
+<p align="center">Minimum 1</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="closeDialog(customSlider.value)">Add</button>
+</div>

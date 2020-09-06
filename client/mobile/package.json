@@ -1,0 +1,38 @@
+{
+  "name": "it.unive.easyrestaurant.app",
+  "displayName": "EasyRestaurant",
+  "author": "Luca Bozzetto",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LucaBozzetto/EasyRestaurant"
+  },
+  "version": "1.0.0",
+  "description": "The official EasyRestaurant mobile app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd ../angular && ng build --configuration=mobile --base-href ./ --output-path ../mobile/www && cd -",
+    "generate-android": "cordova build android && mv ./platforms/android/app/build/outputs/apk/debug/app-debug.apk ../../releases/android/easyrestaurant.apk"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "dependencies": {
+    "cordova-android": "^8.0.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-ios": "^5.0.1"
+  },
+  "devDependencies": {
+    "cordova-plugin-whitelist": "^1.3.4"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  }
+}

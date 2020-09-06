@@ -1,0 +1,33 @@
+<h1 align="center" mat-dialog-title>Create a new Menu Item</h1>
+<div mat-dialog-content>
+  <p align="center">Select the number of seats:</p>
+<br>
+<form>
+  <mat-form-field>
+      <input name="name" [(ngModel)]="name" matInput placeholder="Name" type="text" maxlength="50" required>
+  </mat-form-field>
+  <mat-form-field>
+      <input name="price" [(ngModel)]="price" matInput placeholder="Price" type="number" min=0 required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Select a type</mat-label>
+      <mat-select name='type'[(ngModel)]="type" required>
+        <mat-option *ngFor="let type of getItemTypes()" [value]="type">
+          {{ type | titlecase }}
+        </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+      <input name="tag" [(ngModel)]="tag" matInput placeholder="Tag" type="text" maxlength="50">
+  </mat-form-field>
+  <mat-form-field>
+      <input name="timeRequired" [(ngModel)]="timeRequired" matInput placeholder="Preparation time (in minutes)" type="text" min=0>
+  </mat-form-field>
+</form>
+<br>
+<p align="center"><i>Please mind foods require tag and preparation time as well</i></p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="createItem(false)">Cancel</button>
+  <button mat-flat-button color="primary" (click)="createItem(true)">Create</button>
+</div>
