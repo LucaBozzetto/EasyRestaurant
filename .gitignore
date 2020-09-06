@@ -5,5 +5,10 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+.eslintrc.json
 
+node_modules/
+data
 releases
+server
+client
