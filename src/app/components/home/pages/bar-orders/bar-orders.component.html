@@ -1,0 +1,190 @@
+<div class="kt-portlet">
+  <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">schedule</mat-icon>
+        Due
+      </ng-template>
+
+      <!--begin::Portlet-->
+      <div class="kt-portlet ">
+
+        <div class="kt-portlet__body">
+
+        <div class="kt-searchbar distance">
+            <div class="input-group">
+              <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                      <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" id="Path-2" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                      <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" id="Path" fill="#000000" fill-rule="nonzero"></path>
+                    </g>
+                  </svg></span></div>
+                  <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchOrder">
+            </div>
+          </div>  
+
+        <div class="kt-divider">
+            <span></span>
+        </div>
+        <br>
+        <h3 align="center">Orders:</h3>
+        <br>
+
+        <div class="kt-portlet__body" *ngIf="(getPendingOrders() | filter: searchOrder: ['_id', 'table', 'waiter', 'submittedAt', 'quantity', 'price', 'type', 'timeRequired', 'extra']).length < 1">
+          <h5 align="center">
+            No order found!
+          </h5>
+        </div>                
+
+
+
+         <!-- timeline -->
+          <div class="row" *ngIf="(getPendingOrders() | filter: searchOrder: ['_id', 'table', 'waiter', 'submittedAt', 'quantity', 'price', 'type', 'timeRequired', 'extra']).length > 0">
+
+            <div class="col-xl-1">
+            </div>
+
+            <div class="col-xl-10">
+              <div class="kt-timeline-v1">
+                <div class="kt-timeline-v1__items">
+                  <div class="kt-timeline-v1__marker"></div>
+
+                  <!-- order begin -->
+                  <div *ngFor="let order of (getPendingOrders() | filter: searchOrder: ['_id', 'table', 'waiter', 'submittedAt', 'quantity', 'price', 'type', 'timeRequired', 'extra']); let i = index">
+                  <div class="kt-timeline-v1__item" [ngClass]="{'kt-timeline-v1__item--first': i===0, 'kt-timeline-v1__item--left': i%2===0, 'kt-timeline-v1__item--right': i%2===1}">
+                    <div class="kt-timeline-v1__item-circle">
+                      <div class="kt-bg-danger"></div>
+                    </div>
+                    <span class="kt-timeline-v1__item-time kt-font-brand">
+                      {{ order.submittedAt | date: 'HH:mm a' }}
+                    </span>
+                    <div class="kt-timeline-v1__item-content">
+                      <div class="kt-timeline-v1__item-title">
+                        <h3>Table {{ order.tableNumber }}</h3>
+                      </div>
+                      <h5>
+                          Order #{{ order.orderNumber }}
+                      </h5>
+                      <div class="kt-timeline-v1__item-body">
+                        <table class="table table-bordered table-hover center-text">
+                          <thead>
+                            <tr>
+                              <th>Quantity</th>
+                              <th>Name</th>
+                              <th>Price</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let element of order.beverage">
+                              <td>{{ element.quantity }}</td>
+                              <td>{{ element.item.name | titlecase }}</td>
+                              <td>{{ element.item.price | currency:'EUR'}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                      </div>
+                      <div class="kt-timeline-v1__item-actions">
+                        <button (click)="orderReady(order)"class="btn btn-outline-brand btn-bold btn-sm" >Mark as ready</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- order end -->
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-1">
+            </div>
+
+          </div>
+
+
+      </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">done_outline</mat-icon>
+        Completed
+      </ng-template>
+      <!--begin::Portlet-->
+      <div class="kt-portlet ">
+
+          <div class="kt-portlet__body">
+  
+          <div class="kt-searchbar distance">
+              <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                        <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" id="Path-2" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                        <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" id="Path" fill="#000000" fill-rule="nonzero"></path>
+                      </g>
+                    </svg></span></div>
+                    <input type="text" class="form-control" placeholder="Search" [(ngModel)]="completedOrderSearch">
+              </div>
+            </div>  
+  
+          <div class="kt-divider">
+              <span></span>
+          </div>
+          <br>
+          <h3 align="center">Orders:</h3>
+          <br>
+  
+          <div class="kt-portlet__body" *ngIf="(getCompletedOrders() | filter: completedOrderSearch: ['_id', 'table', 'waiter', 'submittedAt', 'quantity', 'price', 'type', 'timeRequired', 'extra']).length < 1">
+            <h5 align="center">
+              No order found!
+            </h5>
+          </div>                
+  
+          <!-- completed orders -->
+
+          <!--begin::Accordion-->
+      <div class="accordion accordion-solid accordion-toggle-plus" *ngIf="(getCompletedOrders() | filter: completedOrderSearch: ['_id', 'table', 'waiter', 'submittedAt', 'quantity', 'price', 'type', 'timeRequired', 'extra']).length > 0">
+
+        <!-- Order start -->
+        <div class="card" *ngFor="let order of (getCompletedOrders() | filter: completedOrderSearch: ['_id', 'table', 'waiter', 'submittedAt', 'quantity', 'price', 'type', 'timeRequired', 'extra'])">
+          <div class="card-header">
+            <div class="card-title">
+              Order #{{order.orderNumber}} - Table {{ order.tableNumver }}
+            </div>
+          </div>
+          <div class="collapse show">
+            <div class="card-body">
+
+                <mat-list>
+                    <h3 mat-subheader>Food</h3>
+                    <mat-list-item *ngFor="let element of order.food">
+                      <mat-icon mat-list-icon>restaurant</mat-icon>
+                      <h4 mat-line>{{element.item.name | titlecase}}</h4>
+                      <p mat-line> Quantity: {{element.quantity}} </p>
+                      <p *ngIf="element.note" mat-line> Note: {{element.note}} </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <h3 mat-subheader>Beverage</h3>
+                    <mat-list-item *ngFor="let element of order.beverage">
+                      <mat-icon mat-list-icon>local_drink</mat-icon>
+                      <h4 mat-line>{{element.item.name | titlecase}}</h4>
+                      <p mat-line> Quantity: {{element.quantity}} </p>
+                    </mat-list-item>
+                  </mat-list>
+
+            </div>
+          </div>
+        </div>
+        <!-- Order end -->
+
+      </div>
+      <!--end::Accordion-->
+
+          </div>
+        </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

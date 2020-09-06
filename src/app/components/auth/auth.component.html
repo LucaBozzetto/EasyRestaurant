@@ -1,0 +1,49 @@
+<!-- begin::Body -->
+  <!-- begin:: Page -->
+  <div class="kt-grid kt-grid--ver kt-grid--root fullscreen">
+    <div [ngClass]="this.getClass()" class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v6" id="kt_login">
+      <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile">
+        <div class="kt-grid__item  kt-grid__item--order-tablet-and-mobile-2  kt-grid kt-grid--hor kt-login__aside">
+          <div class="kt-login__wrapper">
+            <div class="kt-login__container">
+              <div class="kt-login__body">
+                <div class="kt-login__logo">
+                  <a href="#">
+                    <img src="./assets/media/company-logos/logo-text.jpg" style="max-width: 96px;">
+                  </a>
+                </div>
+
+                <div class="kt-login__signin" [ngClass]="{flipInX: this.isLoginActive, animated: this.isLoginActive}">
+                  <app-login></app-login>
+                </div>
+                <div class="kt-login__signup" [ngClass]="{flipInX: this.isRegistrationActive, animated: this.isRegistrationActive}">
+                  <app-registration></app-registration>
+                </div>
+
+                <div class="kt-login__forgot" [ngClass]="{flipInX: this.isForgotActive, animated: this.isForgotActive}">
+                  <app-forgot></app-forgot>
+                </div>
+              </div>
+            </div>
+            <div class="kt-login__account">
+              <span class="kt-login__account-msg">
+                Don't have an account yet ?
+              </span>&nbsp;&nbsp;
+              <a (click)="this.setRegistrationActive()" href="javascript:;" id="kt_login_signup" class="kt-login__account-link">Sign Up!</a>
+            </div>
+          </div>
+        </div>
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid__item--center kt-grid kt-grid--ver kt-login__content" style="background-image: url(./assets/media/bg/bg-5.jpg);">
+          <div class="kt-login__section">
+            <div class="kt-login__block">
+              <h3 class="kt-login__title">Join Us!</h3>
+              <div class="kt-login__desc">
+                EasyRestaurant makes running a restaurant easy!
+                <br>Enjoy a hassle free experience, your customers and employees are going to love our service
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,85 @@
+.table-title {
+	font-weight: 600 !important;
+	font-size: 1.8rem !important;
+}
+
+.table-message {
+	color: #a7abc3 !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+}
+
+// Free table
+.table-free {
+	background-color: rgba(10, 187, 135, 0.1);
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease !important;
+    transition: all 0.3s ease !important;
+}
+
+.table-free:hover{
+	box-shadow: 0px 1px 15px 1px rgba(11, 187, 135, 0.6);
+	-webkit-box-shadow: 0px 1px 15px 1px rgba(11, 187, 135, 0.6);
+	cursor: pointer;
+}
+
+.table-status-free {
+	background-color: #0abb87;
+    color: #ffffff; 
+}
+
+.table-seats-free {
+	color: #0abb87 !important;
+	font-weight: 300 !important;
+	font-size: 1.6rem !important;
+}
+
+// Order Ready table
+.table-order {
+	background-color: rgba(93, 120, 255, 0.1);
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease !important;
+    transition: all 0.3s ease !important;
+}
+
+.table-order:hover{
+	box-shadow: 0px 1px 15px 1px rgba(94, 120, 255, 0.6);
+	-webkit-box-shadow: 0px 1px 15px 1px rgba(94, 120, 255, 0.6);
+	cursor: pointer;
+}
+
+.table-status-order {
+	background-color: #5d78ff;
+    color: #ffffff; 
+}
+
+.table-seats-order {
+	color: #5d78ff !important;
+	font-weight: 300 !important;
+	font-size: 1.6rem !important;
+}
+
+// Occupied table
+.table-occupied {
+	background-color: rgba(190, 56, 71, 0.1);
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease !important;
+    transition: all 0.3s ease !important;
+}
+
+.table-occupied:hover{
+	box-shadow: 0px 1px 15px 1px rgba(191, 56, 71, 0.6);
+	-webkit-box-shadow: 0px 1px 15px 1px rgba(191, 56, 71, 0.6);
+	cursor: pointer;
+}
+
+.table-status-occupied {
+	background-color: #dc3545;
+    color: #ffffff; 
+}
+
+.table-seats-occupied {
+	color: #dc3545 !important;
+	font-weight: 300 !important;
+	font-size: 1.6rem !important;
+}

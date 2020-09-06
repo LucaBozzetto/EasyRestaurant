@@ -1,0 +1,64 @@
+ <!-- begin:: Subheader -->
+ <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+  <div class="kt-subheader__main">
+    <h3 class="kt-subheader__title">
+        <button type="button" class="btn btn-outline-hover-dark" *ngIf="backButton" (click)='goBack()'>
+            <i class="flaticon2-back"></i> Back
+        </button>
+        <div *ngIf="!backButton">{{pageName | titlecase}}</div>
+    </h3>
+        
+    <!-- <span class="kt-subheader__separator kt-hidden"></span>
+    <div class="kt-subheader__breadcrumbs">
+      <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-back"></i></a>
+      <span class="kt-subheader__breadcrumbs-separator"></span>
+      <a href="" class="kt-subheader__breadcrumbs-link">
+        General </a>
+      <span class="kt-subheader__breadcrumbs-separator"></span>
+      <a href="" class="kt-subheader__breadcrumbs-link">
+        Empty Page </a> -->
+
+      <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+    <!-- </div> -->
+  </div>
+  <div class="kt-subheader__toolbar">
+    <div class="kt-subheader__wrapper">
+      
+      <div *ngIf="isUserAdmin()" (click)="this.openAdminToolsMenu($event)" [class.show]="this.isAdminToolsMenuOpened" class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="Admin tools" data-placement="left">
+        <a class="btn kt-subheader__btn-primary test">
+          Admin Tools &nbsp;
+  
+          <!--<i class="flaticon2-calendar-1"></i>-->
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--sm">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <rect id="bound" x="0" y="0" width="24" height="24" />
+              <rect id="Rectangle-8" fill="#000000" x="4" y="5" width="16" height="3" rx="1.5" />
+              <path d="M7.5,11 L16.5,11 C17.3284271,11 18,11.6715729 18,12.5 C18,13.3284271 17.3284271,14 16.5,14 L7.5,14 C6.67157288,14 6,13.3284271 6,12.5 C6,11.6715729 6.67157288,11 7.5,11 Z M10.5,17 L13.5,17 C14.3284271,17 15,17.6715729 15,18.5 C15,19.3284271 14.3284271,20 13.5,20 L10.5,20 C9.67157288,20 9,19.3284271 9,18.5 C9,17.6715729 9.67157288,17 10.5,17 Z" id="Combined-Shape" fill="#000000" opacity="0.3" />
+            </g>
+          </svg> </a>
+          
+            <div [class.show]="this.isAdminToolsMenuOpened" class="dropdown-menu dropdown-menu-right mobile-fix">
+              <ul class="kt-nav">
+                <li class="kt-nav__section kt-nav__section--first">
+                  <span class="kt-nav__section-text">Add new:</span>
+                </li>
+                <li class="kt-nav__item" (click)="addTable()">
+                  <a class="kt-nav__link">
+                    <i class="kt-nav__link-icon flaticon2-layers-1"></i>
+                    <span class="kt-nav__link-text">Table</span>
+                  </a>
+                </li>
+                <li class="kt-nav__item" (click)="addItem()">
+                  <a class="kt-nav__link">
+                    <i class="kt-nav__link-icon flaticon2-file-1"></i>
+                    <span class="kt-nav__link-text">Item</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end:: Subheader -->
